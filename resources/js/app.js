@@ -28,7 +28,11 @@ const vuetify = createVuetify({
 const app = createApp();
 
 import MainComponent from './components/MainComponent.vue';
+import AdminPanel from './components/AdminPanel.vue';
+import NavBar from './components/NavBar.vue';
 app.component('main-component', MainComponent);
+app.component('admin-panel', AdminPanel);
+app.component('nav-bar', NavBar);
 
 /**
  * The following block of code may be used to automatically register your

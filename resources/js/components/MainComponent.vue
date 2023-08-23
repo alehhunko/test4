@@ -1,9 +1,5 @@
 <template>
-    <v-breadcrumbs :items="items">
-        <template v-slot:title="{ item }">
-            {{ item.title.toUpperCase() }}
-        </template>
-    </v-breadcrumbs>
+    <NavBar></NavBar>
     <div class="d-flex justify-start">
         <h1 class="text-decoration-underline">Ответы на вопросы</h1>
     </div>
@@ -20,7 +16,6 @@
                                     adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                     dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                                     ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <ModalForm></ModalForm>
                             </v-expansion-panel-text>
                         </v-expansion-panel>
                     </v-expansion-panels>
@@ -30,26 +25,14 @@
     </v-container>
 </template>
 <script>
-import ModalForm from './ModalForm.vue';
+import NavBar from './NavBar.vue';
 export default {
     data() {
         return {
-            items: [
-                {
-                    title: 'Main',
-                    disabled: false,
-                    href: '/',
-                },
-                {
-                    title: 'Sing in',
-                    disabled: false,
-                    href: '/singin',
-                },
-            ],
         }
     },
     components: {
-        ModalForm,
+        NavBar
     },
 }
 </script>
