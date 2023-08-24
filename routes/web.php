@@ -17,6 +17,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Controller::class, 'index'])->name('main');
 
-Route::get('/adminpanel', [App\Http\Controllers\Controller::class, 'admin'])->name('admin');
+Route::get('/adminpanel', [App\Http\Controllers\Controller::class, 'admin'])->middleware('admin')->name('admin');
 
-Route::get('/singin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

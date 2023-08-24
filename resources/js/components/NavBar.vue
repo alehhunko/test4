@@ -23,7 +23,7 @@ export default {
                 {
                     title: 'Sing in',
                     disabled: false,
-                    href: '/singin',
+                    href: '/home',
                 },
             ],
         }

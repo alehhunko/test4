@@ -23,13 +23,19 @@ class Controller extends BaseController
         return view('admin');
     }
 
+    public function all_request()
+    {
+        $questions = Question::all();
+        return $questions;
+    }
+
     public function add_request(Request $request)
     {
         $data = $request->validate([
             'request' => 'nullable|string|max:1000',
             'response' => 'nullable|string|max:1000',
         ]);
-        $client = Question::create($data);
-        return $client;
+        $question = Question::create($data);
+        return $question;
     }
 }
