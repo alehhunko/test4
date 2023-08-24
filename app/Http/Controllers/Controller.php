@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Style;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -37,5 +38,21 @@ class Controller extends BaseController
         ]);
         $question = Question::create($data);
         return $question;
+    }
+
+    public function get_size()
+    {
+        $size = Style::all();
+        return $size;
+    }
+
+    public function edit_size(Request $request)
+    {
+        $data = $request->validate([
+            'sizetop' => 'integer',
+            'sizebottom' => 'integer',
+        ]);
+        $size = Style::where("id", 1)->update($data);
+        return $size;
     }
 }

@@ -1,6 +1,14 @@
 <template>
   <v-sheet class="ma-2 pa-2 bg-grey-lighten-2" v-for="question in questions">
-    Ответы на вопросы
+    <div class="d-flex justify-space-between">
+      <p>Ответы на вопросы</p>
+      <div>
+        <v-btn icon="$edit" size="x-small"
+          @click.prevent="ChangeQuestionID(question.id, question.request, question.response)"></v-btn>
+        <v-btn icon="$delete" size="x-small" class="ml-2"
+          @click.prevent="DeleteQuestionID(question.id)"></v-btn>
+      </div>
+    </div>
     <v-expansion-panels>
       <v-expansion-panel class="mb-6 mt-2">
         <v-expansion-panel-title>{{ question.request }}</v-expansion-panel-title>
@@ -9,6 +17,16 @@
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
+
+    <v-card v-if="question.id === questionID">
+      <v-card-text>
+        <v-text-field v-model="request" label="Вопрос"></v-text-field>
+        <v-text-field v-model="response" label="Ответ"></v-text-field>
+      </v-card-text>
+      <v-card-actions class="d-flex justify-end">
+        <v-btn color="primary" @click.prevent="editQuestion()">Изменить</v-btn>
+      </v-card-actions>
+    </v-card>
   </v-sheet>
 
   <v-divider></v-divider>
@@ -48,12 +66,14 @@ export default {
       response: '',
       questions: [],
       dialog: false,
+      questionID: '',
+
     }
   },
 
   methods: {
     getQuestion() {
-      axios.get("api").then((response) => {
+      axios.get("api/request").then((response) => {
         this.questions = response.data;
       });
     },
@@ -68,8 +88,17 @@ export default {
           this.getQuestion();
           this.request = "";
           this.response = "";
-          this.dialog = false;
         });
+    },
+
+    ChangeQuestionID(id, request, response) {
+      this.questionID = id;
+      this.request = request;
+      this.response = response;
+    },
+
+    editQuestion(id) {
+      this.questionID = '';
     },
   },
 

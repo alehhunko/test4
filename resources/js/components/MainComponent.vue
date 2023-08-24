@@ -5,19 +5,21 @@
     </div>
     <v-container>
         <v-row no-gutters>
-            <v-col cols="4" v-for="question in questions">
-                <v-sheet class="ma-2 pa-2 bg-grey-lighten-2" >
-                    Ответы на вопросы
-                    <v-expansion-panels >
-                        <v-expansion-panel class="mb-6 mt-2">
-                            <v-expansion-panel-title>{{ question.request }}</v-expansion-panel-title>
-                            <v-expansion-panel-text>
-                                {{ question.response }}
-                            </v-expansion-panel-text>
-                        </v-expansion-panel>
-                    </v-expansion-panels>
-                </v-sheet>
-            </v-col>
+            <template v-for="question in questions">
+                <v-col cols="4" :style="{ 'margin-top': top + 'px', 'margin-bottom': bottom + 'px' }">
+                    <v-sheet class="ma-2 pa-2 bg-grey-lighten-2">
+                        Ответы на вопросы
+                        <v-expansion-panels>
+                            <v-expansion-panel>
+                                <v-expansion-panel-title>{{ question.request }}</v-expansion-panel-title>
+                                <v-expansion-panel-text>
+                                    {{ question.response }}
+                                </v-expansion-panel-text>
+                            </v-expansion-panel>
+                        </v-expansion-panels>
+                    </v-sheet>
+                </v-col>
+            </template>
         </v-row>
     </v-container>
 </template>
@@ -28,19 +30,28 @@ export default {
     data() {
         return {
             questions: [],
+            top: '',
+            bottom: '',
         }
     },
 
     methods: {
         getQuestion() {
-            axios.get("api").then((response) => {
+            axios.get("api/request").then((response) => {
                 this.questions = response.data;
+            });
+        },
+        getSize() {
+            axios.get("api/size").then((response) => {
+                this.top = response.data[0].sizetop;
+                this.bottom = response.data[0].sizebottom;
             });
         },
     },
 
     mounted() {
         this.getQuestion();
+        this.getSize();
     },
     components: {
         NavBar

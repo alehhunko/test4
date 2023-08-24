@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', [Controller::class, 'all_request']);
-Route::get('/data', [Controller::class, 'insert_data']);
+Route::get('/request', [Controller::class, 'all_request']);
 Route::post('/request', [Controller::class, 'add_request']);
+Route::get('/size', [Controller::class, 'get_size']);
+Route::post('/size', [Controller::class, 'edit_size']);
