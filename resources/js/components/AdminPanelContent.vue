@@ -10,8 +10,8 @@
     </div>
     <v-expansion-panels>
       <v-expansion-panel class="mb-6 mt-2">
-        <v-expansion-panel-title>{{ question.request }}</v-expansion-panel-title>
-        <v-expansion-panel-text :style="{ 'padding-top': top + 'px', 'padding-bottom': bottom + 'px' }">
+        <v-expansion-panel-title :style="{ 'margin-top': top + 'px', 'margin-bottom': bottom + 'px' }">{{ question.request }}</v-expansion-panel-title>
+        <v-expansion-panel-text :style="{ 'margin-top': top + 'px', 'margin-bottom': bottom + 'px' }">
           {{ question.response }}
         </v-expansion-panel-text>
       </v-expansion-panel>
