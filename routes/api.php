@@ -21,5 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/request', [Controller::class, 'all_request']);
 Route::post('/request', [Controller::class, 'add_request']);
+Route::delete('/request/{id}', [Controller::class, 'delete_request']);
+Route::patch('/request/{id}', [Controller::class, 'edit_request']);
 Route::get('/size', [Controller::class, 'get_size']);
 Route::post('/size', [Controller::class, 'edit_size']);

@@ -40,6 +40,22 @@ class Controller extends BaseController
         return $question;
     }
 
+    public function edit_request(Request $request, Question $id)
+    {
+        $data = $request->validate([
+            'request' => 'nullable|string|max:1000',
+            'response' => 'nullable|string|max:1000',
+        ]);
+        $question = $id->update($data);
+        return $question;
+    }
+
+    public function delete_request(Question $id)
+    {
+        $id->delete();
+        return response([]);
+    }
+
     public function get_size()
     {
         $size = Style::all();

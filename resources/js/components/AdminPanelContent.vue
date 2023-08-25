@@ -4,9 +4,8 @@
       <p>Ответы на вопросы</p>
       <div>
         <v-btn icon="$edit" size="x-small"
-          @click.prevent="ChangeQuestionID(question.id, question.request, question.response)"></v-btn>
-        <v-btn icon="$delete" size="x-small" class="ml-2"
-          @click.prevent="DeleteQuestionID(question.id)"></v-btn>
+          @click.prevent="changeQuestionID(question.id, question.request, question.response)"></v-btn>
+        <v-btn icon="$delete" size="x-small" class="ml-2" @click.prevent="deleteQuestionID(question.id)"></v-btn>
       </div>
     </div>
     <v-expansion-panels>
@@ -24,7 +23,7 @@
         <v-text-field v-model="response" label="Ответ"></v-text-field>
       </v-card-text>
       <v-card-actions class="d-flex justify-end">
-        <v-btn color="primary" @click.prevent="editQuestion()">Изменить</v-btn>
+        <v-btn color="primary" @click.prevent="editQuestion(question.id)">Изменить</v-btn>
       </v-card-actions>
     </v-card>
   </v-sheet>
@@ -91,14 +90,26 @@ export default {
         });
     },
 
-    ChangeQuestionID(id, request, response) {
+    changeQuestionID(id, request, response) {
       this.questionID = id;
       this.request = request;
       this.response = response;
     },
 
     editQuestion(id) {
-      this.questionID = '';
+      axios.patch(`api/request/${id}`,{
+        request: this.request,
+        response: this.response,
+      }).then((response) => {
+        this.getQuestion();
+        this.questionID = '';
+      });
+    },
+
+    deleteQuestionID(id) {
+      axios.delete(`api/request/${id}`).then((response) => {
+        this.getQuestion();
+      });
     },
   },
 
