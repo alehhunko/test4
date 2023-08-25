@@ -26,10 +26,10 @@
 <script>
 export default {
     data: () => ({
-        sizetop: '8',
-        sizebottom: '8',
+        sizetop: '2',
+        sizebottom: '2',
         sizes: [
-            '8', '12', '16', '20',
+            '2', '8', '16', '24',
         ],
     }),
 
@@ -41,6 +41,7 @@ export default {
                     sizebottom: this.sizebottom,
                 })
                 .then((res) => {
+                    window.location.reload()
                 });
         },
     },

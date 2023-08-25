@@ -11,7 +11,7 @@
     <v-expansion-panels>
       <v-expansion-panel class="mb-6 mt-2">
         <v-expansion-panel-title>{{ question.request }}</v-expansion-panel-title>
-        <v-expansion-panel-text>
+        <v-expansion-panel-text :style="{ 'padding-top': top + 'px', 'padding-bottom': bottom + 'px' }">
           {{ question.response }}
         </v-expansion-panel-text>
       </v-expansion-panel>
@@ -66,6 +66,8 @@ export default {
       questions: [],
       dialog: false,
       questionID: '',
+      top: '',
+      bottom: '',
 
     }
   },
@@ -74,6 +76,13 @@ export default {
     getQuestion() {
       axios.get("api/request").then((response) => {
         this.questions = response.data;
+      });
+    },
+
+    getSize() {
+      axios.get("api/size").then((response) => {
+        this.top = response.data[0].sizetop;
+        this.bottom = response.data[0].sizebottom;
       });
     },
 
@@ -97,7 +106,7 @@ export default {
     },
 
     editQuestion(id) {
-      axios.patch(`api/request/${id}`,{
+      axios.patch(`api/request/${id}`, {
         request: this.request,
         response: this.response,
       }).then((response) => {
@@ -115,6 +124,7 @@ export default {
 
   mounted() {
     this.getQuestion();
+    this.getSize();
   },
 }
 </script>
